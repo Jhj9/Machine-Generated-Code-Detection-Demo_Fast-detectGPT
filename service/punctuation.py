@@ -11,7 +11,7 @@ torch.manual_seed(0)
 np.random.seed(0)
 random.seed(2023)
 
-class PunctuationGenerator:
+class MachineCodeDetector:
     def __init__(self):
         print('*setting model*')
         self.cache_dir = './.cache'

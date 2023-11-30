@@ -1,5 +1,5 @@
 from fastapi import APIRouter, File, UploadFile, Depends
-from service import PunctuationGenerator
+from service import MachineCodeDetector
 from fastapi_restful.inferring_router import InferringRouter
 from fastapi_utils.cbv import cbv
 from pydantic import BaseModel
@@ -14,7 +14,7 @@ router = InferringRouter()
 class Punctuation:
 
     print('**** setting Punctuation models ****')
-    svc = PunctuationGenerator()
+    svc = MachineCodeDetector()
 
     @router.get('/punc/hello')
     async def hello(self):
@@ -22,10 +22,5 @@ class Punctuation:
 
     @router.post('/punc/text')
     async def inference_text(self, input: TextInferenceInput):
-
-        #input.text = input.text.replace('\n', '')
-        #result = await self.svc.preprocessing(input.text)
-        print(input.text)
         result = await self.svc.generate(input.text)
-        print(result)
         return result
