@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <title>BRL Bridge Chatbot Demo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'submit.css' %}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://nowonbun.github.io/Loader/loader.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="https://nowonbun.github.io/Loader/loader.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
+  <style>
+    body{
+      font-size:15px;
+      font-family:'Montserrat','Noto Sans KR', sans-serif;
+      font-weight:500;
+      color:#555;
+      padding-top:10px;
+    }
+  </style>
+  </head>
+  </head>
+<body class="w3-content" style="max-width:100%;">
+  <div style="padding-left:100px;">
+  <!-- Sidebar/menu -->
+    <nav class="w3-sidebar w3-bar-block w3-collapse w3-top w3-text-black" style="z-index:3;width:250px; background-color:#fff;" id="mySidebar">
+      <!--Sidebar Title    #f1f3ff-->
+      <div class="w3-container w3-display-container w3-padding-16">
+        <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
+        <a href="/" style="text-decoration:none;"><h3 class="w3-wide" style="padding-top:10px;"><b>BRL Bridge<br>Chatbot<br>Demo</b></h3></a>
+      </div>
+      <div id="class1list" class="w3-bar-block w3-padding-large w3-medium">
+            <a href="/" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>Description</a>
+            <a href="{% url 'demo' %}" class="w3-bar-item w3-button">Demo</a>
+      </div>
+    </nav>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:250px">
+
+    <!-- Top header -->
+    <header class="w3-container w3-xlarge">
+      <p class="w3-left-align" style="color:#000000"><b>Description</b></p>
+    </header>
+
+    <div class="w3-container" id="class_content">
+      <p id="description">
+        We created a chatbot demo to utilize information related to the bridge.
+        Users can submit a query about the bridge to receive a response from the chatbot. The chatbot extracts context and answers from the Bridge Manual to formulate its response.
+        You can also check the source of the context utilized to formulate the response and the content of the corresponding document.
+        <br><br>
+        For further details, please contact us through the information below.
+      </p>
+      <a href="{% url 'demo' %}" style="text-decoration:none"><button class="submit" id="try_demo">Try Demo <b>→</b></button></a>
+
+    </div>
+    <br><br><br><br>
+    <br><br><br><br>
+
+    <!-- End page content -->
+    </div>
+  </div>
+
+<!-- Footer -->
+  <footer id="footer">
+      <div style="margin:auto;">
+        <div class="footer">
+          <p>About</p>
+          Human Language Intelligence Lab. <br>@ SKKU<br>
+          <a href="https://hli.skku.edu/links">https://hli.skku.edu/links</a>
+        </div>
+        <div class="footer">
+          <p>Contributors</p>
+          Hyunjin Kim, khyunjin1993@g.skku.edu<br>
+          Jiwoo Kim, wldn9705@g.skku.edu<br>
+          Hyejoon Jang, iris99hj@g.skku.edu
+        </div>
+        <div class="footer">
+          <p>Advisor</p>
+          Prof. Jinyeong Bak, jy.bak@skku.edu<br><br><br>
+        </div>
+        <div class="footer" style="margin-left:80px;">
+          <img src="{%static 'skku.png' %}" alt="SKKU" width="150" height="auto" style="image-rendering: -webkit-optimize-contrast; margin:20px 0; vertical-align:baseline">
+        </div>
+    </div>
+  </footer>
+</body>
+</html>

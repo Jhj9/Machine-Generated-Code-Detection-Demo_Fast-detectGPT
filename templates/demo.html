@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Machine-Generated Code Detection Demo - Fast-DetectGPT</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', path='/css/submit.css') }}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://nowonbun.github.io/Loader/loader.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="https://nowonbun.github.io/Loader/loader.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
+  <style>
+    body{
+      font-size:15px;
+      font-family:'Montserrat','Noto Sans KR', sans-serif;
+      font-weight:500;
+      color:#555;
+      padding-top:10px;
+    }
+  </style>
+  </head>
+
+<body class="w3-content" style="max-width:100%;">
+  <div style="padding-left:100px;">
+  <!-- Sidebar/menu -->
+    <nav class="w3-sidebar w3-bar-block w3-collapse w3-top w3-text-black" style="z-index:3;width:250px; background-color:#fff;" id="mySidebar">
+      <!--Sidebar Title    #f1f3ff-->
+      <div class="w3-container w3-display-container w3-padding-16">
+        <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
+        <a href="/" style="text-decoration:none;"><h4 class="w3-wide" style="padding-top:10px;"><b>Machine<br>Generated<br>Code Detection<br>Fast-DetectGPT</b></h4></a>
+      </div>
+      <div id="class1list" class="w3-bar-block w3-padding-large w3-medium">
+            <!--<a href="/" class="w3-bar-item w3-button">Description</a>-->
+            <a href="/" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>Demo</a>
+      </div>
+    </nav>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:250px">
+
+      <!-- Top header -->
+      <header class="w3-container w3-xlarge">
+        <p class="w3-left-align" style="color:#000000"><b>Demo</b></p>
+      </header>
+      <div class="w3-container" id="class_content">
+          <div id="chat"></div>
+          <div class="container">
+            <form>
+              <input type="text" class="input" id="inputDirect" name="inputDirect" autocomplete="off" placeholder="Enter your question"/>
+            </form>
+            <button class="submit" id="submit1">Send</button>
+          </div>
+      </div>
+      <br><br><br><br>
+      <br><br><br><br>
+      <!-- End page content -->
+    </div>
+  </div>
+  <footer id="footer">
+      <div style="margin:auto;">
+        <div class="footer">
+          <p>About</p>
+          Human Language Intelligence Lab. <br>@ SKKU<br>
+          <a href="https://hli.skku.edu/links">https://hli.skku.edu/links</a>
+        </div>
+        <div class="footer">
+          <p>Contributors</p>
+          Hyejoon Jang, iris99hj@g.skku.edu<br>
+          Jiyun Park, nicole2974@g.skku.edu<br><br>
+        </div>
+        <div class="footer">
+          <p>Advisor</p>
+          Prof. Jinyeong Bak, jy.bak@skku.edu<br><br><br>
+        </div>
+        <div class="footer" style="margin-left:80px;">
+          <img src="{{ url_for('static', path='/images/skku.png') }}" alt="SKKU" width="150" height="auto"  style="image-rendering: -webkit-optimize-contrast; margin:20px 0; vertical-align:baseline"><br>
+        </div>
+    </div>
+  </footer>
+  <script type="text/javascript">
+
+    var btn = 1;
+    var chat_window = 0;
+    $(function() {
+      $(document).on("keydown", "form", function(event) {
+          return event.key != "Enter";
+      });
+  
+      function showResult(btn){
+        loader.setReload(true);
+        question = $("#inputDirect").val();
+        
+        $.ajax({
+          type: "post",
+          url: "/punc/text",
+          data: JSON.stringify({ 'text' : question }),
+          dataType: 'json',
+          contentType: 'application/json',
+          success: function (response) {
+            loader.off();
+            answer_response = response;
+            
+            temp = `<div class="questions" id="question${btn}"><p><b>${question}</b></p></div>
+            <div class="results" id="result${btn}"><p>Answer : <br><b>"${answer_response} "</b></p></div>`
+            $("#chat").append(temp);
+
+            chat_window += $('#result'+btn).prop('scrollHeight') + $('#question'+btn).prop('scrollHeight') + 50
+            $("#chat").css('height', chat_window+"px");
+            
+            $("input#inputDirect").val('');
+
+            $("#result"+btn).hide();
+            $("#question"+btn).hide();
+            $("#question"+btn).slideDown();
+            $("#result"+btn).slideDown();
+          },
+          error: function(){
+            loader.off();
+            temp = `<div class="questions" id="question${btn}"><p><b>${question}</b></p></div>
+            <div class="results" id="result${btn}"><p><b>Input is not valid.</b> 😥</p></div>`
+            $("#chat").append(temp);
+
+            chat_window += $('#result'+btn).height() + $('#question'+btn).height() + 20
+            $("#chat").css('height', chat_window+"px");
+            
+            $("input#inputDirect").val('');
+
+            $("#result"+btn).hide();
+            $("#question"+btn).hide();
+            $("#question"+btn).slideDown();
+            $("#result"+btn).slideDown();
+          }
+        });
+        loader.on();
+      };
+  
+      $("#submit1").on('click', function(){showResult(btn); btn = btn + 1});
+    });
+  </script>
+</body>
+</html>

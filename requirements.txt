@@ -1,0 +1,13 @@
+torch
+tqdm
+transformers
+numpy
+pandas
+
+fastapi
+fastapi-restful
+fastapi-utils
+pydantic==1.10.10
+uvicorn
+typing-inspect
+jinja2
