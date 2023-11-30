@@ -1,1 +1,1 @@
-from .punctuation import PunctuationGenerator
+from .punctuation import MachineCodeDetector
